@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add Training Program</h1>
+    <form action="add_training" method="POST">
+        {% csrf_token %}
+        <h4>Title</h4>
+        <input type="text" name="title">
+        <h4>Description</h4>
+        <input type="text" name="description">
+        <h4>Start Date</h4>
+        <input type="date" name="start_date">
+        <h4>End Date</h4>
+        <input type="date" name="end_date"><br>
+        <h4>Trainer Name</h4>
+        <input type="text" name="trainer_name"><br>
+        <input type="submit">
+    </form>
+</body>
+</html>

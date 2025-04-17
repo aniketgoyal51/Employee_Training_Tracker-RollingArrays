@@ -43,31 +43,3 @@ def add_Training(request):
         return redirect('training')
     else:
         return render(request,'add_training.html')
-
-
-def get_Enrollment(request):
-    trainees=TrainingProgram.objects.all()
-    employees=Employee.objects.all()
-    enrollment=Enrollment.objects.all()
-    return render(request,'enrollment.html',{'trainees':trainees,'employees':employees,'enrollments':enrollment})
-
-def add_Enrollment(request):
-
-    if(request.method=='POST'):
-        employee_id=request.POST['employee']
-        program_id=request.POST['training_program']
-        status=request.POST['status']
-
-        employee = Employee.objects.get(id=employee_id)
-        program = TrainingProgram.objects.get(id=program_id)
-
-        enrollment=Enrollment.objects.create(employee=employee,training_program=program,status=status)
-        enrollment.save()
-        
-        return redirect('enrollment')
-    else:
-        trainees=TrainingProgram.objects.all()
-        employees=Employee.objects.all()
-        status=Enrollment.STATUS_CHOICES
-        
-        return render(request,'add_enrollment.html',{'trainees':trainees,'employees':employees,'status_choices': status})
