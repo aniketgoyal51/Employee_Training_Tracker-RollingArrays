@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add Enrollment</h1>
+    <form action="add_enrollment" method="POST">
+        {% csrf_token %}
+        <h4>Select Employee</h4>
+        <select name="employee">
+            {% for emp in employees %}
+                <option value="{{ emp.id }}">{{ emp.name }}</option>
+            {% endfor %}
+        </select>
+
+        <h4>Select Training Program</h4>
+        <select name="training_program">
+            {% for trainee in trainees %}
+                <option value="{{ trainee.id }}">{{ trainee.title }}</option>
+            {% endfor %}
+        </select>
+        <h4>Select Status</h4>
+        <select name="status">
+            {% for key, label in status_choices %}
+                <option value="{{ key }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form>
+</body>
+</html>

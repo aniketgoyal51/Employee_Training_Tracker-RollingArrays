@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment</title>
+    <style>
+        button{
+            background-color: #a74628;
+            padding: 10px 20px;
+            border: 2px solid #007BFF;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-left: 1rem;
+        }
+        a{
+            text-decoration: None;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div style="margin: 10px 0; background-color: #a74628">
+        {% include 'templates/index.html' %}
+    </div>
+    <button><a href="add_enrollment">Add enrollment</a></button>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+        <thead>
+            <tr style="background-color: #a74628; color: white;">
+                <th style="padding: 10px; border: 1px solid #ccc;">ID</th>
+                <th style="padding: 10px; border: 1px solid #ccc;">Employee Name</th>
+                <th style="padding: 10px; border: 1px solid #ccc;">Training Name</th>
+                <th style="padding: 10px; border: 1px solid #ccc;">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enrollment in enrollments %}
+            <tr style="background-color: #f0f8ff;">
+                <td style="padding: 10px; border: 1px solid #ccc;">{{ enrollment.id }}</td>
+                <td style="padding: 10px; border: 1px solid #ccc;">{{ enrollment.employee.name }}</td>
+                <td style="padding: 10px; border: 1px solid #ccc;">{{ enrollment.training_program.title }}</td>
+                <td style="padding: 10px; border: 1px solid #ccc;">{{ enrollment.get_status_display }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</body>
+</html>
