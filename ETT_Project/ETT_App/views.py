@@ -48,7 +48,14 @@ def add_Training(request):
 def get_Enrollment(request):
     trainees=TrainingProgram.objects.all()
     employees=Employee.objects.all()
-    enrollment=Enrollment.objects.all()
+    if(request.method=="POST"):
+        choice=request.POST['status']
+        if choice == "all":
+            enrollment = Enrollment.objects.all()
+        else:
+            enrollment = Enrollment.objects.filter(status=choice)
+    else:
+        enrollment=Enrollment.objects.all()
     return render(request,'enrollment.html',{'trainees':trainees,'employees':employees,'enrollments':enrollment})
 
 def add_Enrollment(request):

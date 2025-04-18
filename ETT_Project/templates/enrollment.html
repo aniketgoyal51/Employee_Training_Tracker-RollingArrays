@@ -7,8 +7,9 @@
     <style>
         button{
             background-color: #a74628;
+            max-height: 50px;
             padding: 10px 20px;
-            border: 2px solid #007BFF;
+            border: 2px solid #ce927f;
             border-radius: 8px;
             font-size: 16px;
             margin-left: 1rem;
@@ -17,13 +18,71 @@
             text-decoration: None;
             color: white;
         }
+        form {
+            margin: 20px 1rem;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 2px solid #a74628;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: Arial, sans-serif;
+            width: fit-content;
+        }
+
+        select {
+            padding: 8px 12px;
+            border: 1px solid #a74628;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"] {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #a74628;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #873923;
+        }
+
+        .filter{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
     </style>
 </head>
 <body>
     <div style="margin: 10px 0; background-color: #a74628">
         {% include 'templates/index.html' %}
     </div>
-    <button><a href="add_enrollment">Add enrollment</a></button>
+    <div class="filter">
+        <button><a href="add_enrollment">Add enrollment</a></button>
+        <form method="POST">
+            {% csrf_token %}
+            <select name="status" id="">
+                <option value="all">All</option>
+                <option value="enrolled">Enrolled</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+            </select>
+            <input type="submit" value="Filter">
+        </form>
+    </div>
+    
     <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
         <thead>
             <tr style="background-color: #a74628; color: white;">
