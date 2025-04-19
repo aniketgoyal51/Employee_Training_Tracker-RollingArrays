@@ -1,34 +1,49 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Enrollment</title>
+    {% tailwind_css %}
 </head>
-<body>
-    <h1>Add Enrollment</h1>
-    <form action="add_enrollment" method="POST">
-        {% csrf_token %}
-        <h4>Select Employee</h4>
-        <select name="employee">
-            {% for emp in employees %}
-                <option value="{{ emp.id }}">{{ emp.name }}</option>
-            {% endfor %}
-        </select>
-
-        <h4>Select Training Program</h4>
-        <select name="training_program">
-            {% for trainee in trainees %}
-                <option value="{{ trainee.id }}">{{ trainee.title }}</option>
-            {% endfor %}
-        </select>
-        <h4>Select Status</h4>
-        <select name="status">
-            {% for key, label in status_choices %}
-                <option value="{{ key }}">{{ label }}</option>
-            {% endfor %}
-        </select>
-        <input type="submit">
-    </form>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center text-[#a74628]">Add Enrollment</h1>
+        <form action="add_enrollment" method="POST" class="space-y-4">
+            {% csrf_token %}
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Select Employee</label>
+                <select name="employee" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#a74628]">
+                    {% for emp in employees %}
+                        <option value="{{ emp.id }}">{{ emp.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Select Training Program</label>
+                <select name="training_program" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#a74628]">
+                    {% for trainee in trainees %}
+                        <option value="{{ trainee.id }}">{{ trainee.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Select Status</label>
+                <select name="status" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#a74628]">
+                    {% for key, label in status_choices %}
+                        <option value="{{ key }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="text-center">
+                <input type="submit" value="Submit" class="bg-[#a74628] text-white px-4 py-2 rounded-md hover:bg-[#9c4d35] transition duration-300">
+            </div>
+        </form>
+    </div>
 </body>
 </html>

@@ -1,0 +1,143 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Training Overview</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  {% tailwind_css %}
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <div class=" p-4">
+        {% include "templates/nav.html" %}
+    </div>
+
+    <div class="container mx-auto px-4 py-6">
+        <!-- Action Buttons -->
+        <div class="flex justify-center gap-6 mb-10">
+            <a href="add_employee" class="bg-white text-black border-2 border- rounded-lg py-3 px-8 text-lg font-medium transition duration-300">
+                Add Employee
+            </a>
+            <a href="add_training" class="bg-white text-black border-2 border- rounded-lg py-3 px-8 text-lg font-medium transition duration-300">
+                Add Training Program
+            </a>
+            <a href="add_enrollment" class="bg-white text-black border-2 border rounded-lg py-3 px-8 text-lg font-medium transition duration-300">
+                Add Enrollment
+            </a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex flex-row gap-2 justify-between">
+
+            <!-- Training Overview Table -->
+            <div class="w-full lg:w-1/2 bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-center text-3xl font-semibold mb-6">Training Overview</h3>
+                <table class="min-w-full table-auto border-separate border-spacing-0">
+                    <thead>
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Metric</th>
+                            <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b">
+                            <td class="px-6 py-3 text-sm text-gray-600">Total Employee</td>
+                            <td class="px-6 py-3 text-sm text-gray-600">{{ display.total_employee }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="px-6 py-3 text-sm text-gray-600">Total Training</td>
+                            <td class="px-6 py-3 text-sm text-gray-600">{{ display.total_training }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="px-6 py-3 text-sm text-gray-600">Total Enrollment</td>
+                            <td class="px-6 py-3 text-sm text-gray-600">{{ display.total_enrollment }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="px-6 py-3 text-sm text-gray-600">Total Enrolled</td>
+                            <td class="px-6 py-3 text-sm text-gray-600">{{ display.total_enrolled }}</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="px-6 py-3 text-sm text-gray-600">Total In Progress</td>
+                            <td class="px-6 py-3 text-sm text-gray-600">{{ display.total_in_progress }}</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-3 text-sm text-gray-600">Total Completed</td>
+                            <td class="px-6 py-3 text-sm text-gray-600">{{ display.total_completed }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Charts -->
+            <div class="w-full lg:w-1/2 bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-3xl font-semibold text-center mb-8">Training Dashboard Overview</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Main Pie Chart -->
+                    <div class="flex flex-col items-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-4">Main Overview</h4>
+                        <canvas id="mainPieChart" class="w-64 h-64"></canvas>
+                    </div>
+
+                    <!-- Sub Pie Chart -->
+                    <div class="flex flex-col items-center">
+                        <h4 class="text-lg font-semibold text-gray-700 mb-4">Enrollment Breakdown</h4>
+                        <canvas id="enrollmentPieChart" class="w-64 h-64"></canvas>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data from Django
+        const totalEmployee = {{ display.total_employee|default:0 }};
+        const totalTraining = {{ display.total_training|default:0 }};
+        const totalEnrolled = {{ display.total_enrolled|default:0 }};
+        const totalInProgress = {{ display.total_in_progress|default:0 }};
+        const totalCompleted = {{ display.total_completed|default:0 }};
+        const totalEnrollment = {{ display.total_enrollment|default:0 }};
+
+        // Main Pie Chart
+        new Chart(document.getElementById('mainPieChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Employees', 'Trainings', 'Enrollments'],
+                datasets: [{
+                    data: [totalEmployee, totalTraining, totalEnrollment],
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    title: { display: true, text: 'Overall Stats' }
+                }
+            }
+        });
+
+        // Enrollment Breakdown Pie Chart
+        new Chart(document.getElementById('enrollmentPieChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Enrolled', 'In Progress', 'Completed'],
+                datasets: [{
+                    data: [totalEnrolled, totalInProgress, totalCompleted],
+                    backgroundColor: ['#f6c23e', '#e74a3b', '#858796']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' },
+                    title: { display: true, text: 'Enrollment Details' }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
