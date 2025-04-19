@@ -98,7 +98,7 @@
         const totalEnrolled = {{ display.total_enrolled|default:0 }};
         const totalInProgress = {{ display.total_in_progress|default:0 }};
         const totalCompleted = {{ display.total_completed|default:0 }};
-        const totalEnrollment = totalEnrolled + totalInProgress + totalCompleted;
+        const totalEnrollment = {{ display.total_enrollment|default:0 }};
 
         // Main Pie Chart
         new Chart(document.getElementById('mainPieChart'), {
