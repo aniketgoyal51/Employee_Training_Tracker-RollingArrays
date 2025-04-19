@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-3lhk$9^ocyy=yqzgg6z70pgsr#q+^jrj!2^s6miq^i37hw6!%a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['employee-training-tracker-rollingarrays.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
