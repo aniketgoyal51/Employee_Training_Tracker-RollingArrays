@@ -16,9 +16,13 @@ Responsive Design: The UI is built using Tailwind CSS, making the app mobile-fri
 
 **Technologies**
 Backend: Django
+
 Frontend: HTML, Tailwind CSS, JavaScript
+
 Database: SQLite (default; can be configured for others like PostgreSQL)
+
 Charting: Chart.js for visualizing data
+
 Deployment: Render for hosting
 
 **Installation**
@@ -57,7 +61,4 @@ python manage.py runserver
 Access the app: Open your browser and go to http://127.0.0.1:8000/.
 
 Deployment
-Employee Training Tracker - 
-
-License
-This project is open-source and available under the MIT License. See the LICENSE file for more information.
+Employee Training Tracker - https://employee-training-tracker-rollingarrays.onrender.com/
