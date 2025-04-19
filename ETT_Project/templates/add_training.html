@@ -1,25 +1,47 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Training Program</title>
+    {% tailwind_css %}
 </head>
-<body>
-    <h1>Add Training Program</h1>
-    <form action="add_training" method="POST">
-        {% csrf_token %}
-        <h4>Title</h4>
-        <input type="text" name="title">
-        <h4>Description</h4>
-        <input type="text" name="description">
-        <h4>Start Date</h4>
-        <input type="date" name="start_date">
-        <h4>End Date</h4>
-        <input type="date" name="end_date"><br>
-        <h4>Trainer Name</h4>
-        <input type="text" name="trainer_name"><br>
-        <input type="submit">
-    </form>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center text-[#28a745]">Add Training Program</h1>
+        <form action="add_training" method="POST" class="space-y-4">
+            {% csrf_token %}
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Title</label>
+                <input type="text" name="title" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#28a745]">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Description</label>
+                <input type="text" name="description" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#28a745]">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Start Date</label>
+                <input type="date" name="start_date" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#28a745]">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700">End Date</label>
+                <input type="date" name="end_date" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#28a745]">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Trainer Name</label>
+                <input type="text" name="trainer_name" class="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#28a745]">
+            </div>
+            
+            <div class="text-center">
+                <input type="submit" value="Submit" class="bg-[#28a745] text-white px-4 py-2 rounded-md hover:bg-[#218838] transition duration-300">
+            </div>
+        </form>
+    </div>
 </body>
 </html>

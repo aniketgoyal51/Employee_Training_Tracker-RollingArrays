@@ -3,8 +3,24 @@ from .models import Enrollment,Employee,TrainingProgram
 
 
 # Create your views here.
-def index(request):
-    return render(request,'index.html')
+def dashboard(request):
+    total_employee=Employee.objects.all().count()
+    total_training=TrainingProgram.objects.all().count()
+    total_enrollment=Enrollment.objects.all().count()
+    total_enrolled=Enrollment.objects.filter(status='enrolled').count()
+    total_in_progress=Enrollment.objects.filter(status='in_progress').count()
+    total_completed=Enrollment.objects.filter(status='completed').count()
+
+    display={
+        "total_employee":total_employee,
+        "total_training":total_training,
+        "total_enrollment":total_enrollment,
+        "total_enrolled":total_enrolled,
+        "total_in_progress":total_in_progress,
+        "total_completed":total_completed,
+    }
+
+    return render(request,"dashboard.html",{"display":display})
 
 
 def get_Employees(request):
